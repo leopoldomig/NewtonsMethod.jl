@@ -8,6 +8,9 @@ function newtonroot(f, f′; x₀, tolerance = 1E-7, maxiter = 1000)
     normdiff = Inf
     iter = 1
     while normdiff > tolerance && iter <= maxiter
+        if f′(x_old) ≈ 0.0
+            return (root = nothing, normdiff = nothing, iter = nothing)
+        end
         x_new = x_old - f(x_old)/f′(x_old)
         normdiff = norm(x_new - x_old)
         x_old = x_new
