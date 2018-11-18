@@ -54,4 +54,16 @@ using LinearAlgebra, Statistics, Compat, ForwardDiff
     @test newtonroot(f6,      x₀ = x6₀).root == nothing
     @test newtonroot(f6, f6′, x₀ = BigFloat(x6₀), tolerance = 1E-100).root == nothing
     @test newtonroot(f6,      x₀ = BigFloat(x6₀), tolerance = 1E-100).root == nothing
+
+    #Some @test for maxiter
+    #1
+    @test newtonroot(f1, f1′, x₀ = x1₀, maxiter = 10).root == nothing
+    @test newtonroot(f1,      x₀ = x1₀, maxiter = 10).root == nothing
+    @test newtonroot(f1, f1′, x₀ = BigFloat(x1₀), tolerance = 1E-80, maxiter = 100).root == nothing
+    @test newtonroot(f1,      x₀ = BigFloat(x1₀), tolerance = 1E-80, maxiter = 100).root == nothing
+    #4
+    @test newtonroot(f4, f4′, x₀ = x4₀, maxiter = 10).root == nothing
+    @test newtonroot(f4,      x₀ = x4₀, maxiter = 10).root == nothing
+    @test newtonroot(f4, f4′, x₀ = BigFloat(x4₀), tolerance = 1E-100, maxiter = 100).root ≈ BigFloat(-10.0)
+    @test newtonroot(f4,      x₀ = BigFloat(x4₀), tolerance = 1E-100, maxiter = 100).root ≈ BigFloat(-10.0)
 end
