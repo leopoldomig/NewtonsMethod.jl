@@ -29,7 +29,7 @@ D(f) = x -> ForwardDiff.derivative(f, x)
 # Using multiple dispatch
 newtonroot(f; x₀, tolerance = 1E-7, maxiter = 1000) = newtonroot(f, D(f), x₀=x₀, tolerance = tolerance, maxiter = maxiter)
 
-# Exporting
+# Exporting the function
 export newtonroot
 
 end # module
