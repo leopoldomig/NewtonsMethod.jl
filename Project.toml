@@ -1,0 +1,10 @@
+name = "NewtonsMethod"
+uuid = "10164e92-eaf3-11e8-1c48-a3bfa7a6f3be"
+authors = ["Leopoldo Gutierre <leopoldo.mig@gmail.com>"]
+version = "0.1.0"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
