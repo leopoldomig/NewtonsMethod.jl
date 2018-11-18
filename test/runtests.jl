@@ -36,4 +36,22 @@ using LinearAlgebra, Statistics, Compat, ForwardDiff
     @test newtonroot(f4,      x₀ = x4₀).root ≈ -10.0
     @test newtonroot(f4, f4′, x₀ = BigFloat(x4₀), tolerance = 1E-100).root ≈ BigFloat(-10.0)
     @test newtonroot(f4,      x₀ = BigFloat(x4₀), tolerance = 1E-100).root ≈ BigFloat(-10.0)
+
+    #Some @test of non-convergence
+    #5
+    f5(x) = x^2 + 2.0
+    f5′(x) = 2x
+    x5₀ = 10.0
+    @test newtonroot(f5, f5′, x₀ = x5₀).root == nothing
+    @test newtonroot(f5,      x₀ = x5₀).root == nothing
+    @test newtonroot(f5, f5′, x₀ = BigFloat(x5₀), tolerance = 1E-100).root == nothing
+    @test newtonroot(f5,      x₀ = BigFloat(x5₀), tolerance = 1E-100).root == nothing
+    #6
+    f6(x) = 2.0
+    f6′(x) = 0.0
+    x6₀ = 10.0
+    @test newtonroot(f6, f6′, x₀ = x6₀).root == nothing
+    @test newtonroot(f6,      x₀ = x6₀).root == nothing
+    @test newtonroot(f6, f6′, x₀ = BigFloat(x6₀), tolerance = 1E-100).root == nothing
+    @test newtonroot(f6,      x₀ = BigFloat(x6₀), tolerance = 1E-100).root == nothing
 end
