@@ -3,7 +3,7 @@ module NewtonsMethod
 using LinearAlgebra, Statistics, Compat, ForwardDiff
 
 # Declaring the function that applies the newton method
-function newtonroot(f, f′; x₀, tolerance = 1E-2, maxiter = 1000)
+function newtonroot(f, f′; x₀, tolerance = 1E-7, maxiter = 1000)
     x_old = x₀
     normdiff = Inf
     iter = 1
