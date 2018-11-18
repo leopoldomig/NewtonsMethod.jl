@@ -1,5 +1,28 @@
 module NewtonsMethod
 
-greet() = print("Hello World!")
+using LinearAlgebra, Statistics, Compat, ForwardDiff
+
+# Declaring the function that applies the newton method
+function newtonroot(f, f′; x₀, tolerance = 1E-7, maxiter = 1000)
+    x_old = x₀
+    normdiff = Inf
+    iter = 1
+    while normdiff > tolerance && iter <= maxiter
+        x_new = x_old - f(x_old)/f′(x_old)
+        normdiff = norm(x_new - x_old)
+        x_old = x_new
+        iter = iter + 1
+    end
+    return (root = x_old, normdiff = normdiff, iter = iter)
+end
+
+# Applying auto-differentiation
+D(f) = x -> ForwardDiff.derivative(f, x)
+
+# Using multiple dispatch
+newtonroot(f; x₀, tolerance = 1E-7, maxiter = 1000) = newtonroot(f, D(f), x₀=x₀, tolerance = tolerance, maxiter = maxiter)
+
+# Exporting
+export newtonroot
 
 end # module
